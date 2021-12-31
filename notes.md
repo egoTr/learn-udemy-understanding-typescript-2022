@@ -12,3 +12,7 @@ tsc --watch
 
 ## 🌶 Interface vs Type
 https://stackoverflow.com/questions/37233735/interfaces-vs-types-in-typescript
+
+
+## 🥰 Utility types
+https://www.typescriptlang.org/docs/handbook/utility-types.html
