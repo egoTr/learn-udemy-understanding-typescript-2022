@@ -89,13 +89,20 @@
   }
   
   .project-details {
+    background-color: white;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.26);
     padding: 1rem;
     margin: 1rem;
+    cursor: move;
   }
   
   .project-details h2 {
     color: #ff0062;
+    margin: 0.5rem 0;
+  }
+
+  #finished-projects .project-details h2 {
+    color: #0044ff;
     margin: 0.5rem 0;
   }
 
