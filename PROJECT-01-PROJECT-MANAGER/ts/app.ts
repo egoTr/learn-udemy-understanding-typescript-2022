@@ -57,7 +57,7 @@ class AppSingleton {
 
     addProject(title: string, description: string, noPeople: number) {
         const newProject: IProject = {
-            id: `${Application.projects.length + 1}`,
+            id: `${this.#projects.length + 1}`,
             title,
             description,
             noPeople,
@@ -103,7 +103,7 @@ abstract class ProjectBased<T extends HTMLElement> {
     }
 } // class ProjectBased
 
-class ProjectInput extends ProjectBased<HTMLFormElement>{
+class ProjectInput extends ProjectBased<HTMLFormElement> {
     inputTitle: HTMLInputElement;
     inputDescription: HTMLInputElement;
     inputNoPeople: HTMLInputElement;
@@ -152,7 +152,6 @@ class ProjectInput extends ProjectBased<HTMLFormElement>{
     } // clearInput
 } // class ProjectInput
 
-// class ProjectList
 class ProjectList extends ProjectBased<HTMLElement> {
     assignedProjects: IProject[] = [];
 
@@ -176,9 +175,10 @@ class ProjectList extends ProjectBased<HTMLElement> {
         listEl.innerHTML = '';
 
         for (const p of this.assignedProjects) {
-            const listItem = document.createElement('li');
-            listItem.textContent = `#${p.id} ${p.title}`;
-            listEl.appendChild(listItem);
+            //const listItem = document.createElement('li');
+            //listItem.textContent = `#${p.id} ${p.title}`;
+            //listEl.appendChild(listItem);
+            new ProjectDetails(this.container.querySelector('ul').id, p)
         } // for     
     } // populateProjects
 
@@ -189,7 +189,29 @@ class ProjectList extends ProjectBased<HTMLElement> {
     }
 } // class ProjectList
 
+class ProjectDetails extends ProjectBased<HTMLUListElement> {
+    private project: IProject;
+
+    get noPeopleAssigned() {
+        return `${this.project.noPeople} people assigned`;
+    }
+
+    constructor(hostId: string, project: IProject) {
+        super('project-details', hostId, 'beforeend', project.id);
+        this.project = project;
+
+        this.render();
+    }
+
+    private render() {
+        this.container.querySelector('h2').textContent = this.project.title;
+        this.container.querySelector('h3').textContent = this.noPeopleAssigned;
+        this.container.querySelector('p').textContent = this.project.description;
+    }
+} // ProjectDetailss
+
 const Application = AppSingleton.getInstance(); // singleton class
+
 const projectInput = new ProjectInput();
 const activeProjectList = new ProjectList();
 const finishedProjectList = new ProjectList(ProjectStatus.Finished);
