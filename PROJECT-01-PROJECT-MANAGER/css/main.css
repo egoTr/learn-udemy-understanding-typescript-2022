@@ -79,6 +79,7 @@
   .projects h2 {
     margin: 0;
     color: white;
+    font-weight: 500;
   }
   
   .projects ul {
@@ -98,7 +99,7 @@
     margin: 0.5rem 0;
   }
   
-  #finished-projects li h2 {
+ .project li h2 {
     color: #0044ff;
   }
   
