@@ -1,4 +1,6 @@
 namespace ProjectManager {
+    export enum ProjectStatus { Active = "active", Finished = "finished" };
+    
     export interface IProject {
         id: string,
         title: string,
