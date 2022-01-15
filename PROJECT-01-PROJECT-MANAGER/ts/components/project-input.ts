@@ -1,53 +1,51 @@
-/// <reference path="../_singleton.ts" />
-/// <reference path="project-based.ts" />
+import { Application } from '../_singleton.js';
+import { ProjectBased } from './project-based.js';
 
-namespace ProjectManager {
-    export class ProjectInput extends ProjectBased<HTMLFormElement> {
-        inputTitle: HTMLInputElement;
-        inputDescription: HTMLInputElement;
-        inputNoPeople: HTMLInputElement;
+export class ProjectInput extends ProjectBased<HTMLFormElement> {
+    inputTitle: HTMLInputElement;
+    inputDescription: HTMLInputElement;
+    inputNoPeople: HTMLInputElement;
 
-        constructor() {
-            super('project-input', 'app', 'afterbegin', 'user-input');
-            
-            this.inputTitle = this.container.querySelector('#title');
-            this.inputDescription = this.container.querySelector('#description');
-            this.inputNoPeople = this.container.querySelector('#people');
+    constructor() {
+        super('project-input', 'app', 'afterbegin', 'user-input');
 
-            this.configure();
-        } // constructor
+        this.inputTitle = this.container.querySelector('#title');
+        this.inputDescription = this.container.querySelector('#description');
+        this.inputNoPeople = this.container.querySelector('#people');
 
-        private configure() {
-            this.container.addEventListener( 'submit', this.submitHandler.bind(this) );
-        } // configure
+        this.configure();
+    } // constructor
 
-        private submitHandler(event: Event) {
-            event.preventDefault();
+    private configure() {
+        this.container.addEventListener('submit', this.submitHandler.bind(this));
+    } // configure
 
-            const userInput = this.gatherInput();
+    private submitHandler(event: Event) {
+        event.preventDefault();
 
-            if ( Array.isArray(userInput) ) {
-                const [_title, _description, _noPeople] = userInput;
-                Application.addProject(_title, _description, _noPeople);
+        const userInput = this.gatherInput();
 
-                this.clearInput();
+        if (Array.isArray(userInput)) {
+            const [_title, _description, _noPeople] = userInput;
+            Application.addProject(_title, _description, _noPeople);
 
-                this.inputTitle.focus();
-            } // if
-        } // submitHandler
-        
-        private gatherInput(): [string, string, number] | undefined | void { // returned as tuple/ undefined/ void
-            return [
-                this.inputTitle.value,
-                this.inputDescription.value,
+            this.clearInput();
+
+            this.inputTitle.focus();
+        } // if
+    } // submitHandler
+
+    private gatherInput(): [string, string, number] | undefined | void { // returned as tuple/ undefined/ void
+        return [
+            this.inputTitle.value,
+            this.inputDescription.value,
             +this.inputNoPeople.value
-            ]
-        } // gatherInput
+        ]
+    } // gatherInput
 
-        private clearInput() {
-            this.inputTitle.value = '';
-            this.inputDescription.value = '';
-            this.inputNoPeople.value = '';
-        } // clearInput
-    } // class ProjectInput
-}
+    private clearInput() {
+        this.inputTitle.value = '';
+        this.inputDescription.value = '';
+        this.inputNoPeople.value = '';
+    } // clearInput
+} // class ProjectInput

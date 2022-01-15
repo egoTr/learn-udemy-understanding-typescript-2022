@@ -1,9 +1,7 @@
-/// <reference path="models/models.ts" />
-/// <reference path='components/project-input.ts' />
-/// <reference path='components/project-list.ts' />
+import { ProjectStatus } from "./models/models.js";
+import { ProjectInput } from "./components/project-input.js";
+import { ProjectList } from "./components/project-list.js";
 
-namespace ProjectManager {
-    new ProjectInput();
-    new ProjectList();
-    new ProjectList(ProjectStatus.Finished);
-}
+new ProjectInput();
+new ProjectList();
+new ProjectList(ProjectStatus.Finished);

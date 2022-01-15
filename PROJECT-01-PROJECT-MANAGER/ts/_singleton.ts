@@ -1,61 +1,61 @@
-namespace ProjectManager {
-    type Listener = (items: IProject[]) => void;
-    
-    // Singleton class
-    export class AppSingleton {
-        private listeners: Listener[] = [];
-        #projects: IProject[] = [];
-        private static instance: AppSingleton;
+import { IProject, ProjectStatus } from "./models/models.js";
 
-        private constructor() {
+type Listener = (items: IProject[]) => void;
 
-        } // constructor
+// Singleton class
+export class AppSingleton {
+    private listeners: Listener[] = [];
+    #projects: IProject[] = [];
+    private static instance: AppSingleton;
 
-        static getInstance() {
-            if (this.instance)
-                return this.instance;
+    private constructor() {
 
-            this.instance = new AppSingleton();
+    } // constructor
 
+    static getInstance() {
+        if (this.instance)
             return this.instance;
-        } // getInstance
 
-        addListener(fn: Listener) {
-            this.listeners.push(fn);
-        } // addListener
+        this.instance = new AppSingleton();
 
-        updateListeners() {
-            for (const fn of this.listeners)
-                fn( this.#projects.slice() );
-        } // updateListeners
+        return this.instance;
+    } // getInstance
 
-        addProject(title: string, description: string, noPeople: number) {
-            const newProject: IProject = {
-                id: `${this.#projects.length + 1}`,
-                title,
-                description,
-                noPeople,
-                status: ProjectStatus.Active
-            } // newProject
+    addListener(fn: Listener) {
+        this.listeners.push(fn);
+    } // addListener
 
-            this.#projects.push(newProject);
+    updateListeners() {
+        for (const fn of this.listeners)
+            fn(this.#projects.slice());
+    } // updateListeners
 
-            this.updateListeners();        
-        } // addProject
+    addProject(title: string, description: string, noPeople: number) {
+        const newProject: IProject = {
+            id: `${this.#projects.length + 1}`,
+            title,
+            description,
+            noPeople,
+            status: ProjectStatus.Active
+        } // newProject
 
-        moveProject(id: string, newStatus: ProjectStatus) {
-        const project =  this.#projects.find(p => p.id === id);
+        this.#projects.push(newProject);
+
+        this.updateListeners();
+    } // addProject
+
+    moveProject(id: string, newStatus: ProjectStatus) {
+        const project = this.#projects.find(p => p.id === id);
 
         if (project && project.status !== newStatus) {
-                project.status = newStatus;
-                this.updateListeners();
+            project.status = newStatus;
+            this.updateListeners();
         } // if
-        } // moveProject
+    } // moveProject
 
-        get projects() {
-            return this.#projects;
-        }
-    } // class AppSingleton
-    
-    export const Application = AppSingleton.getInstance(); // singleton class
-}
+    get projects() {
+        return this.#projects;
+    }
+} // class AppSingleton
+
+export const Application = AppSingleton.getInstance(); // singleton class
