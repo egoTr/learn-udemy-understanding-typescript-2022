@@ -3,3 +3,6 @@ node_modules/
 
 .DS_Store
 *.js
+
+# Exceptions for including
+!webpack.config*.js
