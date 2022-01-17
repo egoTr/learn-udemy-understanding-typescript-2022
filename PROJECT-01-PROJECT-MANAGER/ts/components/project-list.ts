@@ -1,8 +1,8 @@
-import { Application } from '../_singleton.js';
-import { IProject, ProjectStatus } from '../models/models.js';
-import { IDragTarget } from '../models/drag-drop.js';
-import { ProjectBased } from './project-based.js';
-import { ProjectDetails } from './project-details.js';
+import { Application } from '../_singleton';
+import { IProject, ProjectStatus } from '../models/models';
+import { IDragTarget } from '../models/drag-drop';
+import { ProjectBased } from './project-based';
+import { ProjectDetails } from './project-details';
 
 export class ProjectList extends ProjectBased<HTMLElement> implements IDragTarget {
     assignedProjects: IProject[] = [];

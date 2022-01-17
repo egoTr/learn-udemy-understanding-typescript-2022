@@ -1,4 +1,4 @@
-import { IProject, ProjectStatus } from "./models/models.js";
+import { IProject, ProjectStatus } from "./models/models";
 
 type Listener = (items: IProject[]) => void;
 

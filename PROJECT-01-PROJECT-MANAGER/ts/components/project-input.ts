@@ -1,5 +1,5 @@
-import { Application } from '../_singleton.js';
-import { ProjectBased } from './project-based.js';
+import { Application } from '../_singleton';
+import { ProjectBased } from './project-based';
 
 export class ProjectInput extends ProjectBased<HTMLFormElement> {
     inputTitle: HTMLInputElement;

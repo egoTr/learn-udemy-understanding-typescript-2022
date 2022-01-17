@@ -4,15 +4,17 @@
     "description": "Understanding TypeScript Course Setup",
     "main": "app.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "tsc -w & lite-server"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "lite-server",
+        "build": "webpack --config webpack.config.prod.js"
     },
-    "keywords": [
-    ],
+    "keywords": [],
     "author": "Ego Tran",
     "license": "ISC",
     "devDependencies": {
-      "lite-server": "^2.5.4"
+        "lite-server": "^2.5.4",
+        "ts-loader": "^9.2.6",
+        "webpack": "^5.66.0",
+        "webpack-cli": "^4.9.1"
     }
-  }
-  
+}

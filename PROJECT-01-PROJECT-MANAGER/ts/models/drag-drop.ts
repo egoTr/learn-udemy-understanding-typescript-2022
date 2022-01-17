@@ -3,7 +3,7 @@ export interface IDraggable {
     dragEndHandler(event: DragEvent): void;
 } // IDraggable
 
-export default interface IDragTarget {
+export interface IDragTarget {
     dragOverHandler(event: DragEvent): void;
     dropHandler(event: DragEvent): void;
     dragLeaveHandler(event: DragEvent): void;

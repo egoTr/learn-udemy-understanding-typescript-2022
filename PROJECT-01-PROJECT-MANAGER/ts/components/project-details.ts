@@ -1,6 +1,6 @@
-import { IProject } from '../models/models.js';
-import { IDraggable } from '../models/drag-drop.js';
-import { ProjectBased } from './project-based.js';
+import { IProject } from '../models/models';
+import { IDraggable } from '../models/drag-drop';
+import { ProjectBased } from './project-based';
 
 export class ProjectDetails extends ProjectBased<HTMLUListElement> implements IDraggable {
     private project: IProject;
